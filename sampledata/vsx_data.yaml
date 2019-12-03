@@ -1,0 +1,51 @@
+version : v1 # Set to 'v10.04' if running code v10.04 or later, otherwise set to 'v1'
+bypassproxy: False # Set to 'True' to bypass proxy and communicate directly with device.
+
+primarymgmtip : 10.0.0.1
+primaryusername : username
+primarypassword : password
+primarykeepaliveip : 192.168.6.1/24
+primarykeepaliveinterface : 1/1/48
+
+secondarymgmtip : 10.0.0.2
+secondaryusername : username
+secondarypassword : password
+secondarykeepaliveip : 192.168.6.2/24
+secondarykeepaliveinterface : 1/1/48
+
+# Inter Switch Link Information
+islport : lag33
+peer1isllaginterfaces:
+  - 1/1/46
+  - 1/1/47
+peer2isllaginterfaces:
+  - 1/1/46
+  - 1/1/47
+isllacp : active
+islvlans :
+  - 77
+  - 88
+keepalivevrf : default
+vsxmac : 00:11:22:33:44:55
+
+# Downstream VLAN information
+vlanid   : 100
+vlanname : VLAN100
+vlanportname: vlan100
+vlanportdescription : "Downstream VLAN 100"
+primaryvlanip   : 10.100.100.1/24
+secondaryvlanip : 10.100.100.2/24
+activegatewaymac : 00:00:00:00:00:01
+activegatewayip: 10.100.100.200
+
+# Downstream MCLAG information
+mclagport : lag20
+peer1mclaginterfaces:
+  - 1/1/23
+  - 1/1/24
+peer2mclaginterfaces:
+  - 1/1/23
+  - 1/1/24
+mclaglacp : active
+mclagvlans :
+  - 100

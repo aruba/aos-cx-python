@@ -1,0 +1,23 @@
+switchip : 192.168.1.1
+username : username
+password : password
+version : v1 # Set to 'v10.04' if running code v10.04 or later, otherwise set to 'v1'
+
+bypassproxy: False # Set to 'True' to bypass proxy and communicate directly with device.
+
+vlanid   : 999
+vlanname : VLAN999
+vlandescription : For LAB 999
+
+vlanportname: vlan999
+vlanportdescription : "### SVI for LAB999 ###"
+
+vlaninterfacename : vlan999
+vlanip   : 10.10.10.99/24
+vlanipv6 : 2001:1:1:999::1/64
+
+ipv4helperaddresses :
+  - 1.1.1.1
+  - 2.2.2.2
+
+physicalport: 1/1/20

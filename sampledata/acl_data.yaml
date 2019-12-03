@@ -1,0 +1,26 @@
+switchip : 192.168.1.1
+username : username
+password : password
+version : v1 # Set to 'v10.04' if running code v10.04 or later, otherwise set to 'v1'
+
+bypassproxy: False # Set to 'True' to bypass proxy and communicate directly with device.
+
+ipv4aclname: acl_ipv4
+ipv6aclname: acl_ipv6
+macaclname: acl_mac
+
+aclVLANid: 200
+interfaceVLAN: 1/1/10
+
+ipv4L2ingressinterface: 1/1/11
+ipv6L2ingressinterface: 1/1/12
+
+LAGinterfaces:
+  - 1/1/21
+  - 1/1/22
+
+LAGname: lag13
+
+L3egressinterface: 1/1/40
+
+hitcount: True # Set to 'True' to enable ACL REST GET call to keep track of ACL hits.  Useful for validation.

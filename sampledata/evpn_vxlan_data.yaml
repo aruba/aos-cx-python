@@ -1,0 +1,135 @@
+version : v1 # Set to 'v10.04' if running code v10.04 or later, otherwise set to 'v1'
+bypassproxy: False # Set to 'True' to bypass proxy and communicate directly with device.
+
+spines: # List of Spine switches.  Every Spine must have the attributes listed
+  - mgmtip: 192.168.1.1
+    username: username
+    password: password
+    ospfvrf: default
+    ospfid: 1
+    ospfarea: 0.0.0.0
+    ospftype: pointopoint
+    loopbackinterface: loopback0
+    loopbackip: 10.2.0.101/32
+    downstreaminterface:
+      - interface: 1/1/2
+        ipaddress: 10.1.1.1/31
+      - interface: 1/1/3
+        ipaddress: 10.1.1.5/31
+    bgpasn: 65001
+    bgprouterid: 10.2.0.101
+    addressfamilytype: l2vpn-evpn
+    neighborips:
+      - 10.2.0.1
+      - 10.2.0.2
+
+leafs: # List of Leaf switches.  Every Leaf must have the attributes listed
+  - mgmtip: 192.168.1.2
+    username: username
+    password: password
+    ospfvrf: default
+    ospfid: 1
+    ospfarea: 0.0.0.0
+    ospftype: pointopoint
+    loopbackinterface: loopback0
+    loopbackip: 10.2.0.1/32
+    upstreaminterface:
+      - interface: 1/1/2
+        ipaddress: 10.1.1.0/31
+    bgpasn: 65001
+    bgprouterid: 10.2.0.1
+    addressfamilytype: l2vpn-evpn
+    neighborips:
+      - 10.2.0.101
+    lagtoserver:
+      - name: lag10
+        interfaces:
+          - 1/1/52
+        trunk_vlans:
+          - 11
+          - 12
+        mc_lag: False
+        lacp_mode: active
+    vxlanname: vxlan1
+    vxlanip: 10.2.0.1
+    vnivlans:
+      - 11
+      - 12
+
+  - mgmtip: 192.168.1.3
+    username: username
+    password: password
+    ospfvrf: default
+    ospfid: 1
+    ospfarea: 0.0.0.0
+    ospftype: pointopoint
+    loopbackinterface: loopback0
+    loopbackip: 10.2.0.2/32
+    upstreaminterface:
+      - interface: 1/1/3
+        ipaddress: 10.1.1.4/31
+    bgpasn: 65001
+    bgprouterid: 10.2.0.2
+    addressfamilytype: l2vpn-evpn
+    neighborips:
+      - 10.2.0.101
+    lagtoserver:
+      - name: lag10
+        interfaces:
+          - 1/1/52
+        trunk_vlans:
+          - 11
+          - 12
+        mc_lag: False
+        lacp_mode: active
+    vxlanname: vxlan1
+    vxlanip: 10.2.0.2
+    vnivlans:
+      - 11
+      - 12
+
+borderleaf: #Leaf switch designated to be the border leaf must have these attributes
+  - mgmtip: 192.168.1.3
+    username: username
+    password: password
+    vlans:
+      - 11
+      - 12
+    vrftocore: Core
+    rd: "1:3"
+    addressfamilyimports:
+      - "65001:1"
+      - "65001:2"
+      - "65001:3"
+    addressfamilyexports:
+      - "65001:3"
+    interfacetocore: 1/1/51
+    interfacetocoreip: 10.1.1.12/31
+    bgpasn: 65001
+    neighbortocoreip: 10.1.1.13
+    neighbortocoreasn: 65002
+    addressfamilytype: ipv4-unicast
+    tenantvrfs:
+      - name: VRFa
+        rd: "1:1"
+        addressfamilyimports:
+          - "65001:1"
+          - "65001:3"
+        addressfamilyexports:
+          - "65001:1"
+        redistribute: "ipv4-unicast"
+      - name: VRFb
+        rd: "1:2"
+        addressfamilyimports:
+          - "65001:2"
+          - "65001:3"
+        addressfamilyexports:
+          - "65001:2"
+        redistribute: "ipv4-unicast"
+    interfacevlans:
+      - vlanid: 11
+        vlanvrf: VRFa
+        vlanip: 10.3.1.1/24
+      - vlanid: 12
+        vlanvrf: VRFb
+        vlanip: 10.3.2.1/24

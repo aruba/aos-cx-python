@@ -1,0 +1,40 @@
+switchip : 192.168.1.1
+username : username
+password : password
+version : v1 # Set to 'v10.04' if running code v10.04 or later, otherwise set to 'v1'
+
+bypassproxy: False # Set to 'True' to bypass proxy and communicate directly with device.
+
+# VRF Info
+vrfname : VRFa
+vrfrd : "1:1"
+
+# First VLAN info
+vlan1id   : 999
+vlan1name : VLAN999
+vlan1description : VLAN for VRFa
+
+vlan1portname: vlan999
+vlan1portdescription : "VLAN999 attached to VRFa"
+
+vlan1interfacename : vlan999
+vlan1ip   : 10.10.99.99/24
+vlan1ipv6 : 2001:1:1:999::1/64
+
+# Second VLAN info
+vlan2id   : 888
+vlan2name : VLAN888
+vlan2description : VLAN for VRFa
+
+vlan2portname: vlan888
+vlan2portdescription : "VLAN888 attached to VRFa"
+
+vlan2interfacename : vlan888
+vlan2ip   : 10.10.88.88/24
+
+systemportname: 1/1/20
+systeminterfacename: 1/1/20
+
+ipv4helperaddresses :
+  - 1.1.1.1
+  - 2.2.2.2

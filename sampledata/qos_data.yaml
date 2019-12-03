@@ -1,0 +1,32 @@
+switchip : 192.168.1.1
+username : username
+password : password
+version : v1 # Set to 'v10.04' if running code v10.04 or later, otherwise set to 'v1'
+
+bypassproxy: False # Set to 'True' to bypass proxy and communicate directly with device.
+
+queueprofilename: QOS_PROFILE_OUT
+scheduleprofilename: QOS_OUT
+
+trafficclass:
+  name: wifi-port-qos-0
+  type: ipv4
+
+policy:
+  name: wifi-port-qos-0
+
+lags:
+ - name: lag10
+   interfaces:
+     - 1/1/1
+     - 1/1/2
+   qostrust: dscp
+ - name: lag11
+   interfaces:
+     - 1/1/3
+     - 1/1/4
+   qostrust: cos
+
+portrateinterface: 1/1/20
+
+portpolicyinterface: 1/1/29
