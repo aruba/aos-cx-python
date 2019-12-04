@@ -204,10 +204,14 @@ B. Configure Tenant Infrastructure (VRFs and VXLAN)
         ip address 10.1.1.12/31
     interface vlan11
         vrf attach VRFa
-        ip address 10.3.1.1/24
+        ip address 10.3.1.2/24
+        active-gateway ip mac 00:00:00:00:01:01
+        active-gateway ip 10.3.1.1
     interface vlan12
         vrf attach VRFb
-        ip address 10.3.2.1/24
+        ip address 10.3.2.2/24
+        active-gateway ip mac 00:00:00:00:01:01
+        active-gateway ip 10.3.2.1
     interface vxlan 1
         source ip 10.2.0.2
         no shutdown
@@ -246,7 +250,7 @@ sys.path.append(os.path.join(dirpath, "src"))
 sys.path.append(os.path.join(dirpath, "cx_utils"))
 
 from cx_utils import yaml_ops
-from src import session, vlan, interface, ospf, bgp, lag, vxlan, evpn, vrf
+from src import session, vlan, interface, ospf, bgp, lag, vxlan, evpn, vrf, vsx
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -413,6 +417,8 @@ def main():
                                      "vlan%d" % border_vlan['vlanid'], "vlan%d" % border_vlan['vlanid'],
                                      vlan_desc=None, ipv4=border_vlan['vlanip'], vrf_name=border_vlan['vlanvrf'],
                                      **session_dict)
+            vsx.update_vsx_interface_vlan(border_vlan['vlanid'], False, [], border_vlan['activegatewaymac'],
+                                          border_vlan['activegatewayip'], **session_dict)
 
     except Exception as error:
         print('Ran into exception: {}. Logging out..'.format(error))

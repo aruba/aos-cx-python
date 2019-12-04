@@ -129,7 +129,11 @@ borderleaf: #Leaf switch designated to be the border leaf must have these attrib
     interfacevlans:
       - vlanid: 11
         vlanvrf: VRFa
-        vlanip: 10.3.1.1/24
+        vlanip: 10.3.1.2/24
+        activegatewaymac: 00:00:00:00:01:01
+        activegatewayip: 10.3.1.1
       - vlanid: 12
         vlanvrf: VRFb
-        vlanip: 10.3.2.1/24
+        vlanip: 10.3.2.2/24
+        activegatewaymac: 00:00:00:00:01:01
+        activegatewayip: 10.3.2.1
