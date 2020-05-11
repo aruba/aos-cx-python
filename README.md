@@ -1,3 +1,15 @@
+:warning: :warning: :warning: :warning: :warning: 
+
+**_This repository is deprecated._**
+
+**_The new public GitHub repository for AOS-CX python modules is [here](https://github.com/aruba/pyaoscx)._**
+
+**_To install the official pyaoscx modules, please follow the instructions located on the readthedocs page [here](https://pyaoscx.readthedocs.io/en/latest/)._**  
+
+:warning: :warning: :warning: :warning: :warning: 
+
+---
+
 # aos-cx-python
 
 These scripts are written for AOS-CX API v1 and v10.04. These scripts are written for devices running AOS-CX firmware version 10.04.
